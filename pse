@@ -1,7 +1,13 @@
 #!/usr/bin/env node
-const command = process.argv.slice(2).join(' ').trim();
+const command = process.argv[2].trim();
 if(command == '') return;
-require('child_process').exec(`echo ${command} | ./psc`, (error, stdout, stderr) => {
-	if(error) throw error;
-	(new (require('vm').Script)(stdout)).runInThisContext()
+
+const compiler = require('child_process').spawn('./psc', [], {stdio: 'pipe'});
+compiler.stdin.write(command);
+compiler.stdin.end();
+
+let code = "";
+compiler.stdout.on('data', data => code += data.toString());
+compiler.stdout.on('end', () => {
+	(new (require('vm').Script)(code)).runInThisContext()
 });

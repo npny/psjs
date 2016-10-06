@@ -33,7 +33,7 @@ ${
 	)
 	.join('\n')
 }
-  ${DEBUG_TRACE.slice(-1).map(step => FN[step.call].toString())}
+  ${DEBUG_TRACE.slice(-1).map(step => FN[step.call] ? FN[step.call].toString() : 'This function is not defined')}
   ${e.toString().match(/.*$/)[0]}
 
 `);
