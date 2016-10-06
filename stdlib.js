@@ -1,0 +1,17 @@
+const STDLIB = {
+	"join": (a, b) => a + b,
+	"match": (string, regexp) => string.match(regexp),
+	"replace": (string, regexp, replacement) => string.replace(regexp, replacement),
+	"split": (string, delimiter) => string.split(delimiter),
+	"chunks": (string, chunkSize) => {let res = []; for(let i = 0; i < string.length; i += chunkSize) res.push(string.substr(i, chunkSize)); return res;},
+	"charCode": char => char.charCodeAt(0),
+	"toAscii": charCode => String.fromCharCode(charCode),
+	"pow": (a, b) => Math.pow(a, b),
+	"mul": (a, b) => a * b,
+	"add": (a, b) => a + b,
+	"from-base": (string, base) => parseInt(string, base),
+	"to-base": (number, base) => number.toString(base),
+	"each": code => {while(STACK.length) code();},
+	"pop": item => {},
+	"out": item => {console.log(item);},
+};
